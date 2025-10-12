@@ -1,0 +1,48 @@
+Times for 2000000 vertices and 10000000 connections: 
+ThreadCount: 1
+Parallel: 518
+--------
+Times for 2000000 vertices and 10000000 connections: 
+ThreadCount: 2
+Parallel: 630
+--------
+Times for 2000000 vertices and 10000000 connections: 
+ThreadCount: 4
+Parallel: 439
+--------
+Times for 2000000 vertices and 10000000 connections: 
+ThreadCount: 8
+Parallel: 625
+--------
+Times for 2000000 vertices and 10000000 connections: 
+ThreadCount: 10
+Parallel: 482
+--------
+Times for 2000000 vertices and 10000000 connections: 
+ThreadCount: 16
+Parallel: 563
+--------
+Times for 2000000 vertices and 10000000 connections: 
+ThreadCount: 32
+Parallel: 660
+--------
+Times for 2000000 vertices and 10000000 connections: 
+ThreadCount: 64
+Parallel: 460
+--------
+Times for 2000000 vertices and 10000000 connections: 
+ThreadCount: 100
+Parallel: 618
+--------
+Times for 2000000 vertices and 10000000 connections: 
+ThreadCount: 132
+Parallel: 616
+--------
+Times for 2000000 vertices and 10000000 connections: 
+ThreadCount: 164
+Parallel: 478
+--------
+Times for 2000000 vertices and 10000000 connections: 
+ThreadCount: 200
+Parallel: 613
+--------

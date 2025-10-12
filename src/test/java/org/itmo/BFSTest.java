@@ -36,6 +36,32 @@ public class BFSTest {
         }
     }
 
+    @Test
+    public void threadsTest() throws IOException {
+        int[] sizes = new int[]{2_000_000};
+        int[] connections = new int[]{10_000_000};
+        int[] threadCounts = new int[]{1, 2, 4, 8, 10, 16, 32, 64, 100, 132, 164, 200};
+        Random r = new Random(42);
+        try (FileWriter fw = new FileWriter("tmp/threads_results.txt")) {
+            for (int i = 0; i < sizes.length; i++) {
+                System.out.println("--------------------------");
+                System.out.println("Generating graph of size " + sizes[i] + " ...wait");
+                Graph g = new RandomGraphGenerator().generateGraph(r, sizes[i], connections[i]);
+                System.out.println("Generation completed!\nStarting bfs");
+
+
+                for (int threadCount : threadCounts) {
+                    long parallelTime = executeParallelBfsAndGetTime(g);
+                    fw.append("Times for " + sizes[i] + " vertices and " + connections[i] + " connections: ");
+                    fw.append("\nThreadCount: " + threadCount);
+                    fw.append("\nParallel: " + parallelTime);
+                    fw.append("\n--------\n");
+                }
+            }
+            fw.flush();
+        }
+    }
+
 
     private long executeSerialBfsAndGetTime(Graph g) {
         long startTime = System.currentTimeMillis();
@@ -47,7 +73,15 @@ public class BFSTest {
 
     private long executeParallelBfsAndGetTime(Graph g) {
         long startTime = System.currentTimeMillis();
-        int bfsed = g.parallelBFS(0);
+        int bfsed = g.parallelBFS(0, Runtime.getRuntime().availableProcessors());
+        assertEquals(g.getV(), bfsed);
+        long endTime = System.currentTimeMillis();
+        return endTime - startTime;
+    }
+
+    private long executeParallelBfsAndGetTime(Graph g, int threadCount) {
+        long startTime = System.currentTimeMillis();
+        int bfsed = g.parallelBFS(0, threadCount);
         assertEquals(g.getV(), bfsed);
         long endTime = System.currentTimeMillis();
         return endTime - startTime;
