@@ -10,6 +10,8 @@ import java.util.Random;
 import java.util.function.BiFunction;
 import java.util.stream.IntStream;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 public class BFSTest {
 
     @Test
@@ -37,14 +39,16 @@ public class BFSTest {
 
     private long executeSerialBfsAndGetTime(Graph g) {
         long startTime = System.currentTimeMillis();
-        g.bfs(0);
+        int bfsed = g.bfs(0);
+        assertEquals(g.getV(), bfsed);
         long endTime = System.currentTimeMillis();
         return endTime - startTime;
     }
 
     private long executeParallelBfsAndGetTime(Graph g) {
         long startTime = System.currentTimeMillis();
-        g.parallelBFS(0);
+        int bfsed = g.parallelBFS(0);
+        assertEquals(g.getV(), bfsed);
         long endTime = System.currentTimeMillis();
         return endTime - startTime;
     }
