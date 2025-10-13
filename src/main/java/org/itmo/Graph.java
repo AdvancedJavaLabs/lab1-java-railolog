@@ -111,4 +111,8 @@ class Graph {
     public int getV() {
         return V;
     }
+
+    public ArrayList<Integer>[] getAdjList() {
+        return adjList;
+    }
 }
