@@ -1,14 +1,10 @@
 package org.itmo;
 
-import org.junit.jupiter.api.Test;
-
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.Buffer;
-import java.util.HashSet;
 import java.util.Random;
-import java.util.function.BiFunction;
-import java.util.stream.IntStream;
+
+import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -38,9 +34,9 @@ public class BFSTest {
 
     @Test
     public void threadsTest() throws IOException {
-        int[] sizes = new int[]{2_000_000};
+        int[] sizes = new int[]{1_000_000};
         int[] connections = new int[]{10_000_000};
-        int[] threadCounts = new int[]{1, 2, 4, 8, 10, 16, 32, 64, 100, 132, 164, 200};
+        int[] threadCounts = new int[]{1, 2, 4, 8, 10, 16, 32, 64, 100, 132, 164, 200, 250, 300, 500, 1000};
         Random r = new Random(42);
         try (FileWriter fw = new FileWriter("tmp/threads_results.txt")) {
             for (int i = 0; i < sizes.length; i++) {
@@ -51,7 +47,7 @@ public class BFSTest {
 
 
                 for (int threadCount : threadCounts) {
-                    long parallelTime = executeParallelBfsAndGetTime(g);
+                    long parallelTime = executeParallelBfsAndGetTime(g, threadCount);
                     fw.append("Times for " + sizes[i] + " vertices and " + connections[i] + " connections: ");
                     fw.append("\nThreadCount: " + threadCount);
                     fw.append("\nParallel: " + parallelTime);
